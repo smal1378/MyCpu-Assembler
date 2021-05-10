@@ -22,3 +22,15 @@ as there is only one single register which is called Accomulator (AC for short) 
 14. LSL -> 0x7
 
 - other commands of this cpu will be added later as added to cpu design in "logisim2.7.1".
+
+# Syntax
+
+1. Variables must be defined at first lines, then the code. no indentation must be aplied.
+2. Variables names shouldn't be repititive or an instruction name, they can't start with numbers. all other characters are supported.
+3. Variable definition: "VAR var_name binary_initial_value".
+4. Variables are case sesitive, but not the instructions.
+5. Comments are lines that start with '#'. exp: "# your comment"
+6. Blank lines are ignored.
+7. Non-Addressed Instructions like COMP and LSL does not support address field. exp: "COMP"
+8. Address is var_name like "my_var", hex like "0x5f" or int like "57".
+9. Addressed Instructions like Add or Store accept one address. exp: "ADD my_var"
