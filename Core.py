@@ -1,5 +1,10 @@
 # this is file is the core of assembler,
 from typing import Iterable, Union
+ver = "1.0"
+
+
+class AssembleSyntaxError(TypeError):
+    pass
 
 
 def assemble(reader_handler: Iterable[str]) -> Iterable[bytes]:
@@ -44,7 +49,7 @@ def assemble(reader_handler: Iterable[str]) -> Iterable[bytes]:
             if (len(ins) != 3 or ins[1] in variables or
                     ins[1].lower() in instructions or
                     ins[1][0].isnumeric() or current_addr is not None):
-                raise TypeError("Invalid syntax or variable name")
+                raise AssembleSyntaxError("Invalid syntax or variable name")
             # following line will add the address and init value of the var
             variables[ins[1]] = (last_free_addr, __get_hex(ins[2], line_num,
                                                            variables))
@@ -52,12 +57,13 @@ def assemble(reader_handler: Iterable[str]) -> Iterable[bytes]:
             last_free_addr += 1
             continue
         if not ins[0].lower() in instructions:
-            raise TypeError(f"Invalid instruction name at {line_num}")
+            raise AssembleSyntaxError(f"Invalid instruction name "
+                                      f"at line {line_num}")
         ins_code, ins_addr = instructions[ins[0].lower()]
 
         if ins_addr and len(ins) != 2:
-            raise TypeError(f"Instruction doesn't accept address -"
-                            f" at line {line_num}")
+            raise AssembleSyntaxError(f"Instruction doesn't accept address -"
+                                      f" at line {line_num}")
         if current_addr is None:
             current_addr = last_free_addr
             # now lets first insert the lines into the file
@@ -73,13 +79,14 @@ def assemble(reader_handler: Iterable[str]) -> Iterable[bytes]:
         if not ins_addr and len(ins) == 1:  # those who doesn't have address
             yield __get_hex(ins_code, line_num, variables)
         elif len(ins) == 1:  # non-addressed ins, but got an address
-            raise TypeError(f"Invalid Syntax, got address at line {line_num}")
+            raise AssembleSyntaxError(f"Invalid Syntax, got address "
+                                      f"at line {line_num}")
         elif ins_addr and len(ins) == 2:  # those who has address
             tmp = hex(ins_code)[2:]  # instruction address in hex
             tmp2 = __get_hex(ins[1], line_num, variables)
             yield tmp + tmp2[1:]
         else:
-            raise TypeError(f"Invalid Syntax at line {line_num}")
+            raise AssembleSyntaxError(f"Invalid Syntax at line {line_num}")
         current_addr += 1
     # the for has ended, lets check if current_addr is None
     if current_addr is None:
@@ -119,10 +126,10 @@ def __get_hex(_input: Union[int, str], line_num: int, variables: dict) -> str:
             num = hex(variables[_input][0])[2:]
             return ("0" * (4 - len(num))) + num
         else:
-            raise TypeError("Invalid syntax while converting to hex at"
-                            f"line {line_num}")
+            raise AssembleSyntaxError("Invalid syntax while converting to hex "
+                                      f"at line {line_num}")
     else:
-        raise TypeError("Invalid func argument")
+        raise AssembleSyntaxError("Invalid func argument")
 
 
 if __name__ == '__main__':
