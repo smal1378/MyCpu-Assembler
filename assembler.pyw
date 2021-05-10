@@ -36,14 +36,22 @@ class AssemblerView(Tk):
         if not self.active:
             showerror("Error", "Choose a File first.")
             return
-        file_out = asksaveasfile(title="Save As", mode="wb")
+        file_out = asksaveasfile(title="Save As")
         if not file_out:
             return
+        file_out.write("v2.0 raw/n")
+        counter = 0
         # noinspection PyBroadException
         try:
             with open(self.file_name.cget("text")) as file:
                 for text in assemble(file):
-                    file_out.write(text)
+                    if counter == 0:
+                        file_out.write(text)
+                    elif counter < 5:
+                        file_out.write(" " + text)
+                    else:
+                        file_out.write("*" + text)
+                        counter = 0
                 file.close()
         except AssembleSyntaxError as ex:
             showerror("Error At file", ex.__str__())

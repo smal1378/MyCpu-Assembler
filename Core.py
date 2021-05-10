@@ -7,7 +7,7 @@ class AssembleSyntaxError(TypeError):
     pass
 
 
-def assemble(reader_handler: Iterable[str]) -> Iterable[bytes]:
+def assemble(reader_handler: Iterable[str]) -> Iterable[str]:
     """
     Will assemble the lines of code in reader_handler
     :param reader_handler: an iterable containing strings of each line
