@@ -21,4 +21,4 @@ as there is only one single register which is called Accomulator (AC for short) 
 13. COMP -> 0x6
 14. LSL -> 0x7
 
-- other commands of this cpu will be added later as added to cpu design in
+- other commands of this cpu will be added later as added to cpu design in "logisim2.7.1".
