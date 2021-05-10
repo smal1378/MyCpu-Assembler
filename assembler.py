@@ -5,6 +5,7 @@ from Core import assemble, ver, AssembleSyntaxError
 from os.path import exists
 from traceback import format_exc
 
+
 class AssemblerView(Tk):
     def __init__(self):
         super(AssemblerView, self).__init__()
