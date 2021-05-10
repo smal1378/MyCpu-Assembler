@@ -32,4 +32,5 @@ as there is only one single register which is called Accomulator (AC for short) 
 5. Comments are lines that start with '#'. exp: "# your comment"
 6. Blank lines are ignored.
 7. Non-Addressed Instructions like COMP and LSL does not support address field. exp: "COMP"
-8. Addressed Instructions like Add or Store accept one address or variable name. exp: "ADD my_var"
+8. Address is var_name like "my_var", hex like "0x5f" or int like "57".
+9. Addressed Instructions like Add or Store accept one address. exp: "ADD my_var"
