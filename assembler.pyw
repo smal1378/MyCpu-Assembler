@@ -47,11 +47,11 @@ class AssemblerView(Tk):
                 for text in assemble(file):
                     if counter == 0:
                         file_out.write(text)
-                    elif counter < 5:
-                        file_out.write(" " + text)
+                    # elif counter < 5:
+                    #     file_out.write(" " + text)
                     else:
                         file_out.write("*" + text)
-                        counter = 0
+                        # counter = 0
                     counter += 1
                 file.close()
                 showerror("Done", "Successfully assembled.")
