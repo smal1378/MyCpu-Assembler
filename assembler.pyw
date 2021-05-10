@@ -50,7 +50,7 @@ class AssemblerView(Tk):
                     # elif counter < 5:
                     #     file_out.write(" " + text)
                     else:
-                        file_out.write("*" + text)
+                        file_out.write(" " + text)
                         # counter = 0
                     counter += 1
                 file.close()
