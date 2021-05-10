@@ -116,11 +116,12 @@ def __get_hex(_input: Union[int, str], line_num: int, variables: dict) -> str:
         res = hex(_input)[2:]
         return ("0" * (4 - len(res))) + res
     elif isinstance(_input, str):
-        if "x" == _input[1].lower() and _input[0] == "0":
-            num = hex(int(_input, 16))[2:]
-            return ("0" * (4 - len(num))) + num
-        elif _input.isnumeric():
+        if _input.isnumeric():
             num = hex(int(_input))[2:]
+            return ("0" * (4 - len(num))) + num
+        elif len(_input) > 2 and "x" == _input[1].lower() and _input[0] == "0"\
+                and __ishex(_input[2:]):
+            num = hex(int(_input, 16))[2:]
             return ("0" * (4 - len(num))) + num
         elif _input in variables:
             num = hex(variables[_input][0])[2:]
@@ -130,6 +131,18 @@ def __get_hex(_input: Union[int, str], line_num: int, variables: dict) -> str:
                                       f"at line {line_num}")
     else:
         raise AssembleSyntaxError("Invalid func argument")
+
+
+def __ishex(_input: str) -> bool:
+    """
+    checks whether all characters in _input is 0 to 9 and a to f
+    """
+
+    for i in _input:
+        if not i.isnumeric() and i.lower() not in ("a", "b", "c",
+                                                   "d", "e", "f"):
+            return False
+    return True
 
 
 if __name__ == '__main__':
