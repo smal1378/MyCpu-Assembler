@@ -54,6 +54,7 @@ class AssemblerView(Tk):
                         counter = 0
                     counter += 1
                 file.close()
+                showerror("Done", "Successfully assembled.")
         except AssembleSyntaxError as ex:
             showerror("Error At file", ex.__str__())
         except Exception:
