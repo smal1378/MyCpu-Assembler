@@ -39,7 +39,7 @@ class AssemblerView(Tk):
         file_out = asksaveasfile(title="Save As")
         if not file_out:
             return
-        file_out.write("v2.0 raw/n")
+        file_out.write("v2.0 raw\n")
         counter = 0
         # noinspection PyBroadException
         try:
@@ -52,6 +52,7 @@ class AssemblerView(Tk):
                     else:
                         file_out.write("*" + text)
                         counter = 0
+                    counter += 1
                 file.close()
         except AssembleSyntaxError as ex:
             showerror("Error At file", ex.__str__())
