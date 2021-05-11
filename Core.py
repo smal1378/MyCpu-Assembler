@@ -138,7 +138,7 @@ def __ishex(_input: str) -> bool:
     checks whether all characters in _input is 0 to 9 and a to f
     """
     
-    func = lambda ch: ch.isnumeric() or ch.lower() in ("a", "b", "c", "d", "e", "f")
+    func = lambda ch: ch.isnumeric() or ch.lower() in "abcdef"
     return all(map(func, _input))
 
 
