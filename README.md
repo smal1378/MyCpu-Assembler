@@ -35,5 +35,6 @@ as there is only one single register which is called Accomulator (AC for short) 
 8. Address is var_name like "my_var", hex like "0x5f" or int like "57".
 9. Addressed Instructions like Add or Store accept one address. exp: "ADD my_var"
 ## future syntax
-10. JUMP and JUMPX gets jump_points, to add a jump_point
-11. jump_points are defined in seperate lines and before where you want to jump, defined with JP keyword, exp: "JP hello_there"
+10. JUMP and JUMPX gets jump_points, variables or direct addresses, it's recommended to use jump_points due to safty.
+11. jump_points are defined in seperate lines and before where you want to jump, defined with JP keyword. exp: "JP hello_there"
+12. Indirect addressing are a bit complex to be assembled, I'm working on it's syntax for now.
