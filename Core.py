@@ -137,12 +137,9 @@ def __ishex(_input: str) -> bool:
     """
     checks whether all characters in _input is 0 to 9 and a to f
     """
-
-    for i in _input:
-        if not i.isnumeric() and i.lower() not in ("a", "b", "c",
-                                                   "d", "e", "f"):
-            return False
-    return True
+    
+    func = lambda ch: ch.isnumeric() or ch.lower() in ("a", "b", "c", "d", "e", "f")
+    return all(map(func, _input))
 
 
 if __name__ == '__main__':
