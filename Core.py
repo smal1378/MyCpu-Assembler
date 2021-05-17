@@ -144,7 +144,8 @@ class Assembler:
                 continue
 
             ins = line.split()
-
+            if not ins:
+                continue
             # variables
             if self.__check_variable(line_num, ins):
                 continue
