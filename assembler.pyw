@@ -1,7 +1,7 @@
 from tkinter.filedialog import askopenfilename, asksaveasfile
 from tkinter import Tk, Label, Button
 from tkinter.messagebox import showerror
-from Core import assemble, ver, AssembleSyntaxError
+from Core import Assembler, ver, AssembleSyntaxError
 from os.path import exists
 from traceback import format_exc
 
@@ -44,7 +44,8 @@ class AssemblerView(Tk):
         # noinspection PyBroadException
         try:
             with open(self.file_name.cget("text")) as file:
-                for text in assemble(file):
+                asm = Assembler(file)
+                for text in asm.run_assemble():
                     if counter == 0:
                         file_out.write(text)
                     # elif counter < 5:
